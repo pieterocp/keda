@@ -50,7 +50,6 @@ type metricsAPIScalerMetadata struct {
 	AggregationType                   AggregationType `keda:"name=aggregationType,order=triggerMetadata,default=average,enum=average;sum;max;min"`
 	// Authentication parameters for connecting to the metrics API
 	MetricsAPIAuth *authentication.Config `keda:"optional"`
-
 	triggerIndex int
 }
 
