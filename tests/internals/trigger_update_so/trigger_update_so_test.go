@@ -356,7 +356,7 @@ func testTwoTriggers(t *testing.T, kc *kubernetes.Clientset, data templateData) 
 		"replica count should be %d after 9 minutes", maxReplicas)
 }
 
-// scales to max with kubernetes worload(second trigger), removes it and
+// scales to max with kubernetes workload(second trigger), removes it and
 // scales to 3 replicas based on metric value (first trigger)
 func testRemoveTrigger(t *testing.T, kc *kubernetes.Clientset, data templateData) {
 	t.Log("--- test remove trigger 2 -> 1 ---")

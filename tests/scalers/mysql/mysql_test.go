@@ -250,7 +250,7 @@ func setupMySQL(t *testing.T, kc *kubernetes.Clientset, data templateData, templ
 	KubectlApplyWithTemplate(t, data, "mysqlDeploymentTemplate", mysqlDeploymentTemplate)
 	KubectlApplyWithTemplate(t, data, "mysqlServiceTemplate", mysqlServiceTemplate)
 	require.True(t, WaitForDeploymentReplicaReadyCount(t, kc, "mysql", testNamespace, 1, 30, 2), "mysql is not in a ready state")
-	// Wait 30 sec which would be enought for mysql to be accessible
+	// Wait 30 sec which would be enough for mysql to be accessible
 	time.Sleep(30 * time.Second)
 
 	// Create table that used by the job and the worker

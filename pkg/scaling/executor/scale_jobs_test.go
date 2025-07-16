@@ -88,7 +88,7 @@ func maxScaleValue(maxValue, _ int64) int64 {
 func TestDefaultScalingStrategy(t *testing.T) {
 	logger := logf.Log.WithName("ScaledJobTest")
 	strategy := NewScalingStrategy(logger, getMockScaledJobWithDefaultStrategy("default"))
-	// maxScale doesn't exceed MaxReplicaCount. You can ignore on this sceanrio
+	// maxScale doesn't exceed MaxReplicaCount. You can ignore on this scenario
 	// pendingJobCount isn't relevant on this scenario
 	assert.Equal(t, int64(1), maxScaleValue(strategy.GetEffectiveMaxScale(3, 2, 0, 5, 1)))
 	assert.Equal(t, int64(2), maxScaleValue(strategy.GetEffectiveMaxScale(2, 0, 0, 5, 1)))
@@ -99,7 +99,7 @@ func TestCustomScalingStrategy(t *testing.T) {
 	customScalingQueueLengthDeduction := int32(1)
 	customScalingRunningJobPercentage := "0.5"
 	strategy := NewScalingStrategy(logger, getMockScaledJobWithStrategy("custom", "custom", customScalingQueueLengthDeduction, customScalingRunningJobPercentage))
-	// maxScale doesn't exceed MaxReplicaCount. You can ignore on this sceanrio
+	// maxScale doesn't exceed MaxReplicaCount. You can ignore on this scenario
 	// pendingJobCount isn't relevant on this scenario
 	assert.Equal(t, int64(1), maxScaleValue(strategy.GetEffectiveMaxScale(3, 2, 0, 5, 1)))
 	assert.Equal(t, int64(9), maxScaleValue(strategy.GetEffectiveMaxScale(10, 0, 0, 10, 1)))
@@ -131,7 +131,7 @@ func TestCustomScalingStrategy(t *testing.T) {
 func TestAccurateScalingStrategy(t *testing.T) {
 	logger := logf.Log.WithName("ScaledJobTest")
 	strategy := NewScalingStrategy(logger, getMockScaledJobWithStrategy("accurate", "accurate", 0, "0"))
-	// maxScale doesn't exceed MaxReplicaCount. You can ignore on this sceanrio
+	// maxScale doesn't exceed MaxReplicaCount. You can ignore on this scenario
 	assert.Equal(t, int64(3), maxScaleValue(strategy.GetEffectiveMaxScale(3, 2, 0, 5, 1)))
 	assert.Equal(t, int64(3), maxScaleValue(strategy.GetEffectiveMaxScale(5, 2, 0, 5, 1)))
 

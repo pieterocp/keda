@@ -211,7 +211,7 @@ func (h *scaleHandler) startScaleLoop(ctx context.Context, withTriggers *kedav1a
 	}
 }
 
-// startPushScalers starts all push scalers defined in the input scalableOjbect
+// startPushScalers starts all push scalers defined in the input scalableObject
 func (h *scaleHandler) startPushScalers(ctx context.Context, withTriggers *kedav1alpha1.WithTriggers, scalableObject interface{}, scalingMutex sync.Locker) {
 	logger := log.WithValues("type", withTriggers.Kind, "namespace", withTriggers.Namespace, "name", withTriggers.Name)
 	cache, err := h.GetScalersCache(ctx, scalableObject)
@@ -415,7 +415,7 @@ func (h *scaleHandler) performGetScalersCache(ctx context.Context, key string, s
 	return h.scalerCaches[key], nil
 }
 
-// ClearScalersCache invalidates chache for the input scalableObject
+// ClearScalersCache invalidates cache for the input scalableObject
 func (h *scaleHandler) ClearScalersCache(ctx context.Context, scalableObject interface{}) error {
 	withTriggers, err := kedav1alpha1.AsDuckWithTriggers(scalableObject)
 	if err != nil {
@@ -757,7 +757,7 @@ type scalerState struct {
 
 // getScalerState returns getStateScalerResult with the state
 // for an specific scaler. The state contains if it's active or
-// with erros, but also the records for the cache and he metrics
+// with errors, but also the records for the cache and he metrics
 // for the custom formulas
 func (*scaleHandler) getScalerState(ctx context.Context, scaler scalers.Scaler, triggerIndex int, scalerConfig scalersconfig.ScalerConfig,
 	cache *cache.ScalersCache, logger logr.Logger, scaledObject *kedav1alpha1.ScaledObject) scalerState {

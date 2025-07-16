@@ -653,7 +653,7 @@ func TestIsScaledJobActive(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	recorder := record.NewFakeRecorder(1)
 	// Keep the current behavior
-	// Assme 1 trigger only
+	// Assume 1 trigger only
 	scaledJobSingle := createScaledJob(1, 100, "") // testing default = max
 	scalerCache := cache.ScalersCache{
 		Scalers: []cache.ScalerBuilder{{
@@ -687,7 +687,7 @@ func TestIsScaledJobActive(t *testing.T) {
 	assert.Equal(t, int64(10), maxValue)
 	scalerCache.Close(context.Background())
 
-	// Test the valiation
+	// Test the validation
 	scalerTestDatam := []scalerTestData{
 		newScalerTestData("s0-queueLength", 100, "max", 20, 1, true, 10, 2, true, 5, 3, true, 7, 4, false, true, false, 20, 20),
 		newScalerTestData("queueLength", 100, "min", 20, 1, true, 10, 2, true, 5, 3, true, 7, 4, false, true, false, 5, 2),
@@ -756,7 +756,7 @@ func TestIsScaledJobActiveIfQueueEmptyButMinReplicaCountGreaterZero(t *testing.T
 	ctrl := gomock.NewController(t)
 	recorder := record.NewFakeRecorder(1)
 	// Keep the current behavior
-	// Assme 1 trigger only
+	// Assume 1 trigger only
 	scaledJobSingle := createScaledJob(1, 100, "") // testing default = max
 	scalerSingle := []cache.ScalerBuilder{{
 		Scaler: createScaler(ctrl, int64(0), int64(1), true, metricName),

@@ -2038,7 +2038,7 @@ func TestActivityCount(t *testing.T) {
 		}
 
 		entriesCountFn := func(ctx context.Context) (int64, error) {
-			return 0, nil // Initiall, there is a lag of 0.
+			return 0, nil // Initially, there is a lag of 0.
 		}
 
 		scaler := &redisStreamsScaler{

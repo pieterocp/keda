@@ -268,7 +268,7 @@ func (r *ScaledObjectReconciler) deleteHPA(ctx context.Context, logger logr.Logg
 	return nil
 }
 
-// getScaledObjectMetricSpecs returns MetricSpec for HPA, generater from Triggers defitinion in ScaledObject
+// getScaledObjectMetricSpecs returns MetricSpec for HPA, generater from Triggers definitions in ScaledObject
 func (r *ScaledObjectReconciler) getScaledObjectMetricSpecs(ctx context.Context, logger logr.Logger, scaledObject *kedav1alpha1.ScaledObject) ([]autoscalingv2.MetricSpec, error) {
 	var scaledObjectMetricSpecs []autoscalingv2.MetricSpec
 	var externalMetricNames []string

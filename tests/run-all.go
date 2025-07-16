@@ -92,7 +92,7 @@ func main() {
 	regularTestResults := executeRegularTests(ctx, regularTestFiles)
 
 	//
-	// Execute secuential tests
+	// Execute sequential tests
 	//
 	sequentialTestResults := executeSequentialTests(ctx, sequentialTestFiles)
 
@@ -226,7 +226,7 @@ func executeRegularTests(ctx context.Context, testCases []string) []TestResult {
 		}(testFile)
 	}
 
-	// Wait until all secuential tests ends
+	// Wait until all sequential tests ends
 	if err := sem.Acquire(ctx, int64(concurrentTests)); err != nil {
 		log.Printf("Failed to acquire semaphore: %v", err)
 	}
@@ -257,7 +257,7 @@ func executeSequentialTests(ctx context.Context, testCases []string) []TestResul
 	testResults := []TestResult{}
 
 	//
-	// Execute secuential tests
+	// Execute sequential tests
 	//
 
 	for _, testFile := range testCases {
@@ -266,7 +266,7 @@ func executeSequentialTests(ctx context.Context, testCases []string) []TestResul
 	}
 
 	//
-	// Print secuential logs
+	// Print sequential logs
 	//
 
 	for _, result := range testResults {

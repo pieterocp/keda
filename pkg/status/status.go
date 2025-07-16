@@ -112,7 +112,7 @@ func getTriggerAuth(ctx context.Context, client runtimeclient.Client, triggerAut
 	}
 }
 
-// updateTriggerAuthenticationStatus patches TriggerAuthentication/ClusterTriggerAuthentication from AuthenticationRef with the status that updated by statushanler function or returns an error.
+// updateTriggerAuthenticationStatus patches TriggerAuthentication/ClusterTriggerAuthentication from AuthenticationRef with the status that updated by statusHandler function or returns an error.
 func updateTriggerAuthenticationStatus(ctx context.Context, logger logr.Logger, client runtimeclient.Client, namespace string, triggerAuthRef *kedav1alpha1.AuthenticationRef, statusHandler func(*kedav1alpha1.TriggerAuthenticationStatus) *kedav1alpha1.TriggerAuthenticationStatus) error {
 	triggerAuth, triggerAuthStatus, err := getTriggerAuth(ctx, client, triggerAuthRef, namespace)
 

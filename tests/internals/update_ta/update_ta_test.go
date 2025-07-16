@@ -320,7 +320,7 @@ func testTriggerAuthenticationStatusValue(t *testing.T, data templateData, kind 
 	KubectlApplyWithTemplate(t, data, "scaledJob2Template", scaledJob2Template)
 	CheckKubectlGetResult(t, kind, triggerAuthName, namespace, otherparameter, scaledJobName+","+scaledJob2Name)
 
-	t.Log("--- test reomve scaledObject ---")
+	t.Log("--- test remove scaledObject ---")
 	KubectlDeleteWithTemplate(t, data, "scaledJobTemplate", scaledJobTemplate)
 	CheckKubectlGetResult(t, kind, triggerAuthName, namespace, otherparameter, scaledJob2Name)
 	KubectlDeleteWithTemplate(t, data, "scaledJob2Template", scaledJob2Template)

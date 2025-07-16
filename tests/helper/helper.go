@@ -1065,7 +1065,7 @@ func generateCA(t *testing.T) {
 
 // CheckKubectlGetResult runs `kubectl get` with parameters and compares output with expected value
 func CheckKubectlGetResult(t *testing.T, kind string, name string, namespace string, otherparameter string, expected string) {
-	time.Sleep(1 * time.Second) // wait a second for recource deployment finished
+	time.Sleep(1 * time.Second) // wait a second for resouce deployment finished
 	kctlGetCmd := fmt.Sprintf(`kubectl get %s/%s -n %s %s"`, kind, name, namespace, otherparameter)
 	t.Log("Running kubectl cmd:", kctlGetCmd)
 	output, err := ExecuteCommand(kctlGetCmd)
