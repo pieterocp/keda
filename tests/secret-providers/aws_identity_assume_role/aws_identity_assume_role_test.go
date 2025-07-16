@@ -168,9 +168,9 @@ func TestSqsScaler(t *testing.T) {
 	testScaleWithKEDAIdentity(t, kc, data, sqsClient, queueWorkload1.QueueUrl)
 	// test scaling using correct identity provided via podIdentity.RoleArn
 	// for a role that can be assumed
-	testScaleWithExplicitRoleArnUsingRoleAssumtion(t, kc, data, sqsClient, queueWorkload1.QueueUrl)
+	testScaleWithExplicitRoleArnUsingRoleAssumption(t, kc, data, sqsClient, queueWorkload1.QueueUrl)
 	// test scaling using correct identity provided via podIdentity.RoleArn
-	// for a role to be used with web indentity (workload-2 role allows it)
+	// for a role to be used with web identity (workload-2 role allows it)
 	testScaleWithExplicitRoleArnUsingWebIdentityRole(t, kc, data, sqsClient, queueWorkload2.QueueUrl)
 	// test scaling using correct identity provided via workload
 	testScaleWithWorkloadArn(t, kc, data, sqsClient, queueWorkload1.QueueUrl)
@@ -185,7 +185,7 @@ func TestSqsScaler(t *testing.T) {
 // doesn't have access to the queue, so even though there are messages, the workload
 // won't scale
 func testScaleWithKEDAIdentity(t *testing.T, kc *kubernetes.Clientset, data templateData, sqsClient *sqs.Client, queueURL *string) {
-	t.Log("--- testing scalig out with KEDA role ---")
+	t.Log("--- testing scaling out with KEDA role ---")
 	data.ScaledObjectName = "scale-with-keda-identity"
 	data.TriggerAuthenticationName = "scale-with-keda-identity"
 	KubectlApplyWithTemplate(t, data, "scaledObjectTemplate", scaledObjectTemplate)
@@ -198,10 +198,10 @@ func testScaleWithKEDAIdentity(t *testing.T, kc *kubernetes.Clientset, data temp
 	KubectlDeleteWithTemplate(t, data, "triggerAuthTemplate", triggerAuthenticationTemplate)
 }
 
-func testScaleWithExplicitRoleArnUsingRoleAssumtion(t *testing.T, kc *kubernetes.Clientset, data templateData, sqsClient *sqs.Client, queueURL *string) {
-	t.Log("--- testing scalig out with explicit arn role with role assumption ---")
-	data.ScaledObjectName = "scale-using-role-assumtion"
-	data.TriggerAuthenticationName = "scale-using-role-assumtion"
+func testScaleWithExplicitRoleArnUsingRoleAssumption(t *testing.T, kc *kubernetes.Clientset, data templateData, sqsClient *sqs.Client, queueURL *string) {
+	t.Log("--- testing scaling out with explicit arn role with role assumption ---")
+	data.ScaledObjectName = "scale-using-role-assumption"
+	data.TriggerAuthenticationName = "scale-using-role-assumption"
 	KubectlApplyWithTemplate(t, data, "triggerAuthTemplateWithIdentityID", triggerAuthTemplateWithRoleArn)
 	KubectlApplyWithTemplate(t, data, "scaledObjectTemplate", scaledObjectTemplate)
 	addMessages(t, sqsClient, queueURL, sqsMessageCount)
@@ -213,7 +213,7 @@ func testScaleWithExplicitRoleArnUsingRoleAssumtion(t *testing.T, kc *kubernetes
 }
 
 func testScaleWithExplicitRoleArnUsingWebIdentityRole(t *testing.T, kc *kubernetes.Clientset, data templateData, sqsClient *sqs.Client, queueURL *string) {
-	t.Log("--- testing scalig out with explicit arn role with web indentity role ---")
+	t.Log("--- testing scaling out with explicit arn role with web identity role ---")
 	data.RoleArn = awsWorkload2RoleArn
 	data.SqsQueue = *queueURL
 	data.ScaledObjectName = "scale-using-web-identity"
@@ -229,7 +229,7 @@ func testScaleWithExplicitRoleArnUsingWebIdentityRole(t *testing.T, kc *kubernet
 }
 
 func testScaleWithWorkloadArn(t *testing.T, kc *kubernetes.Clientset, data templateData, sqsClient *sqs.Client, queueURL *string) {
-	t.Log("--- testing scalig out with workload arn role ---")
+	t.Log("--- testing scaling out with workload arn role ---")
 	data.ScaledObjectName = "scale-using-workload-arn"
 	data.TriggerAuthenticationName = "scale-using-workload-arn"
 	KubectlApplyWithTemplate(t, data, "triggerAuthTemplateWithIdentityOwner", triggerAuthTemplateWithIdentityOwner)
@@ -243,7 +243,7 @@ func testScaleWithWorkloadArn(t *testing.T, kc *kubernetes.Clientset, data templ
 }
 
 func testScaleIn(t *testing.T, kc *kubernetes.Clientset, sqsClient *sqs.Client, queueURL *string) {
-	t.Log("--- testing scalig in ---")
+	t.Log("--- testing scaling in ---")
 	totalDeletedMessages := 0
 
 	for {
