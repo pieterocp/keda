@@ -122,7 +122,7 @@ var (
 	minReplicaCount    = 0
 )
 
-func TestKiensisScaler(t *testing.T) {
+func TestKinesisScaler(t *testing.T) {
 	// setup kinesis
 	kinesisClient := createKinesisClient()
 	createKinesisStream(t, kinesisClient)
