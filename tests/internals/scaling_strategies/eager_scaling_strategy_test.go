@@ -100,7 +100,7 @@ func TestScalingStrategy(t *testing.T) {
 	})
 
 	RMQInstall(t, kc, rmqNamespace, user, password, vhost, WithoutOAuth())
-	// Publish 0 messges but create the queue
+	// Publish 0 messages but create the queue
 	RMQPublishMessages(t, rmqNamespace, connectionString, queueName, 0, 0)
 	WaitForAllJobsSuccess(t, kc, rmqNamespace, 60, 1)
 
