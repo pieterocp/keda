@@ -23,7 +23,7 @@ function run_setup {
     go test -v -tags e2e utils/setup_test.go
 }
 
-function excute_test {
+function execute_test {
     if [[ $1 != *_test.go ]] # Skip helper files
     then
         return
@@ -47,7 +47,7 @@ function run_tests {
 
     for test_case in ${test_files[@]}
     do
-        excute_test $test_case 1
+        execute_test $test_case 1
     done
 
     wait_for_jobs
@@ -69,7 +69,7 @@ function run_tests {
 
         for test_case in "${retry_lookup[@]}"
         do
-            excute_test $test_case 2
+            execute_test $test_case 2
         done
 
         wait_for_jobs
@@ -92,7 +92,7 @@ function run_tests {
 
         for test_case in "${retry_lookup[@]}"
         do
-            excute_test $test_case 3
+            execute_test $test_case 3
         done
 
         wait_for_jobs
