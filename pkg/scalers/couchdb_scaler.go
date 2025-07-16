@@ -138,7 +138,7 @@ func (s *couchDBScaler) Close(ctx context.Context) error {
 }
 
 func (s *couchDBScaler) GetMetricSpecForScaling(context.Context) []v2.MetricSpec {
-	metricName := kedautil.NormalizeString(fmt.Sprintf("coucdb-%s", s.metadata.DBName))
+	metricName := kedautil.NormalizeString(fmt.Sprintf("couchdb-%s", s.metadata.DBName))
 	externalMetric := &v2.ExternalMetricSource{
 		Metric: v2.MetricIdentifier{
 			Name: GenerateMetricNameWithIndex(s.metadata.TriggerIndex, metricName),
