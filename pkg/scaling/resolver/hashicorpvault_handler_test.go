@@ -235,8 +235,8 @@ func TestHashicorpVaultHandler_getSecretValue_specify_secret_type(t *testing.T) 
 	secrets, _ = vaultHandler.ResolveSecrets(secrets)
 	assert.Len(t, secrets, 1, "Supposed to get back one secret")
 	secret := secrets[0]
-	assert.Equalf(t, kedav1alpha1.VaultSecretTypeSecretV2, secret.Type, "Expexted secret type be %s", kedav1alpha1.VaultSecretTypeSecretV2)
-	assert.Equalf(t, kedaSecretValue, secret.Value, "Expexted secret to be %s", kedaSecretValue)
+	assert.Equalf(t, kedav1alpha1.VaultSecretTypeSecretV2, secret.Type, "Expected secret type be %s", kedav1alpha1.VaultSecretTypeSecretV2)
+	assert.Equalf(t, kedaSecretValue, secret.Value, "Expected secret to be %s", kedaSecretValue)
 	secrets = []kedav1alpha1.VaultSecret{{
 		Parameter: "test",
 		Path:      "kv/keda",
@@ -246,8 +246,8 @@ func TestHashicorpVaultHandler_getSecretValue_specify_secret_type(t *testing.T) 
 	secrets, _ = vaultHandler.ResolveSecrets(secrets)
 	assert.Len(t, secrets, 1, "Supposed to get back one secret")
 	secret = secrets[0]
-	assert.Equalf(t, kedav1alpha1.VaultSecretTypeSecret, secret.Type, "Expexted secret type be %s", kedav1alpha1.VaultSecretTypeSecret)
-	assert.Equalf(t, kedaSecretValue, secret.Value, "Expexted secret to be %s", kedaSecretValue)
+	assert.Equalf(t, kedav1alpha1.VaultSecretTypeSecret, secret.Type, "Expected secret type be %s", kedav1alpha1.VaultSecretTypeSecret)
+	assert.Equalf(t, kedaSecretValue, secret.Value, "Expected secret to be %s", kedaSecretValue)
 }
 
 type resolveRequestTestData struct {

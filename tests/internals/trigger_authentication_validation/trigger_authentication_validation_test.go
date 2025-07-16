@@ -131,7 +131,7 @@ func testTriggerAuthenticationWithEmptyID(t *testing.T, _ *kubernetes.Clientset,
 	t.Log("--- create triggerauthentication with empty identity id  ---")
 
 	err := KubectlApplyWithErrors(t, data, "triggerAuthWorkloadEmptyIDTemplate", triggerAuthWorkloadEmptyIDTemplate)
-	assert.Errorf(t, err, "can deploy TriggerAuthtication with azureworkload - %s", err)
+	assert.Errorf(t, err, "can deploy TriggerAuthentication with azureworkload - %s", err)
 }
 
 // expect triggerauthentication can be created without identity id property
@@ -151,7 +151,7 @@ func testClusterTriggerAuthenticationWithEmptyID(t *testing.T, _ *kubernetes.Cli
 	t.Log("--- create clustertriggerauthentication with empty identity id  ---")
 
 	err := KubectlApplyWithErrors(t, data, "clusterTriggerAuthWorkloadEmptyIDTemplate", clusterTriggerAuthWorkloadEmptyIDTemplate)
-	assert.Errorf(t, err, "can deploy ClusterTriggerAuthtication with azureworkload - %s", err)
+	assert.Errorf(t, err, "can deploy ClusterTriggerAuthentication with azureworkload - %s", err)
 }
 
 // expect clustertriggerauthentication can be created without identity id property
