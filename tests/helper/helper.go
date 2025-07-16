@@ -1071,8 +1071,8 @@ func CheckKubectlGetResult(t *testing.T, kind string, name string, namespace str
 	output, err := ExecuteCommand(kctlGetCmd)
 	assert.NoErrorf(t, err, "cannot get rollout info - %s", err)
 
-	unqoutedOutput := strings.ReplaceAll(string(output), "\"", "")
-	assert.Equal(t, expected, unqoutedOutput)
+	unquotedOutput := strings.ReplaceAll(string(output), "\"", "")
+	assert.Equal(t, expected, unquotedOutput)
 }
 
 // KedaEventually checks if the provided conditionFunc eventually returns true
