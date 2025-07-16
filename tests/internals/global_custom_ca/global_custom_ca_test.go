@@ -26,12 +26,12 @@ var (
 	testNamespace               = fmt.Sprintf("%s-ns", testName)
 	deploymentName              = fmt.Sprintf("%s-deployment", testName)
 	metricsServerDeploymentName = fmt.Sprintf("%s-metrics-server", testName)
-	servciceName                = fmt.Sprintf("%s-service", testName)
+	serviceName                 = fmt.Sprintf("%s-service", testName)
 	triggerAuthName             = fmt.Sprintf("%s-ta", testName)
 	scaledObjectName            = fmt.Sprintf("%s-so", testName)
 	secretName                  = fmt.Sprintf("%s-secret", testName)
-	metricsServerEndpoint       = fmt.Sprintf("http://%s.%s.svc.cluster.local:8080/api/value", servciceName, testNamespace)
-	metricsServerHTTPSEndpoint  = fmt.Sprintf("https://%s.%s.svc.cluster.local:4333/api/value", servciceName, testNamespace)
+	metricsServerEndpoint       = fmt.Sprintf("http://%s.%s.svc.cluster.local:8080/api/value", serviceName, testNamespace)
+	metricsServerHTTPSEndpoint  = fmt.Sprintf("https://%s.%s.svc.cluster.local:4333/api/value", serviceName, testNamespace)
 	minReplicaCount             = 0
 	maxReplicaCount             = 2
 )
@@ -42,7 +42,7 @@ type templateData struct {
 	MetricsServerDeploymentName string
 	MetricsServerEndpoint       string
 	MetricsServerHTTPSEndpoint  string
-	ServciceName                string
+	ServiceName                 string
 	ScaledObjectName            string
 	TriggerAuthName             string
 	TLSCertificate              string
@@ -137,7 +137,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{.ServciceName}}
+  name: {{.ServiceName}}
   namespace: {{.TestNamespace}}
 spec:
   selector:
@@ -256,12 +256,12 @@ func testScaleIn(t *testing.T, kc *kubernetes.Clientset, data templateData) {
 }
 
 func getTemplateData(t *testing.T) (templateData, []Template) {
-	tlsCrt, TLSKey := GenerateServerCert(t, fmt.Sprintf("%s.%s.svc.cluster.local", servciceName, testNamespace))
+	tlsCrt, TLSKey := GenerateServerCert(t, fmt.Sprintf("%s.%s.svc.cluster.local", serviceName, testNamespace))
 	return templateData{
 			TestNamespace:               testNamespace,
 			DeploymentName:              deploymentName,
 			MetricsServerDeploymentName: metricsServerDeploymentName,
-			ServciceName:                servciceName,
+			ServiceName:                 serviceName,
 			TriggerAuthName:             triggerAuthName,
 			ScaledObjectName:            scaledObjectName,
 			SecretName:                  secretName,

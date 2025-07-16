@@ -18,12 +18,12 @@ var (
 	testNamespace               = fmt.Sprintf("%s-ns", testName)
 	deploymentName              = fmt.Sprintf("%s-deployment", testName)
 	metricsServerDeploymentName = fmt.Sprintf("%s-metrics-server", testName)
-	servciceName                = fmt.Sprintf("%s-service", testName)
+	serviceName                 = fmt.Sprintf("%s-service", testName)
 	triggerAuthName             = fmt.Sprintf("%s-ta", testName)
 	scaledObjectName            = fmt.Sprintf("%s-so", testName)
 	scaledJobName               = fmt.Sprintf("%s-sj", testName)
 	secretName                  = fmt.Sprintf("%s-secret", testName)
-	metricsServerEndpoint       = fmt.Sprintf("http://%s.%s.svc.cluster.local:8080/api/value", servciceName, testNamespace)
+	metricsServerEndpoint       = fmt.Sprintf("http://%s.%s.svc.cluster.local:8080/api/value", serviceName, testNamespace)
 	minReplicaCount             = 0
 	maxReplicaCount             = 2
 )
@@ -33,7 +33,7 @@ type templateData struct {
 	DeploymentName              string
 	MetricsServerDeploymentName string
 	MetricsServerEndpoint       string
-	ServciceName                string
+	ServiceName                 string
 	ScaledObjectName            string
 	ScaledJobName               string
 	TriggerAuthName             string
@@ -102,7 +102,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{.ServciceName}}
+  name: {{.ServiceName}}
   namespace: {{.TestNamespace}}
 spec:
   selector:
@@ -256,7 +256,7 @@ func getTemplateData() (templateData, []Template) {
 			TestNamespace:               testNamespace,
 			DeploymentName:              deploymentName,
 			MetricsServerDeploymentName: metricsServerDeploymentName,
-			ServciceName:                servciceName,
+			ServiceName:                 serviceName,
 			TriggerAuthName:             triggerAuthName,
 			ScaledObjectName:            scaledObjectName,
 			ScaledJobName:               scaledJobName,

@@ -31,11 +31,11 @@ var (
 	testNamespace               = fmt.Sprintf("%s-ns", testName)
 	deploymentName              = fmt.Sprintf("%s-deployment", testName)
 	metricsServerDeploymentName = fmt.Sprintf("%s-metrics-server", testName)
-	servciceName                = fmt.Sprintf("%s-service", testName)
+	serviceName                 = fmt.Sprintf("%s-service", testName)
 	triggerAuthName             = fmt.Sprintf("%s-ta", testName)
 	scaledObjectName            = fmt.Sprintf("%s-so", testName)
 	secretName                  = fmt.Sprintf("%s-secret", testName)
-	metricsServerEndpoint       = fmt.Sprintf("http://%s.%s.svc.cluster.local:8080/api/value", servciceName, testNamespace)
+	metricsServerEndpoint       = fmt.Sprintf("http://%s.%s.svc.cluster.local:8080/api/value", serviceName, testNamespace)
 	minReplicaCount             = 0
 	maxReplicaCount             = 2
 )
@@ -45,7 +45,7 @@ type templateData struct {
 	DeploymentName                    string
 	MetricsServerDeploymentName       string
 	MetricsServerEndpoint             string
-	ServciceName                      string
+	ServiceName                      string
 	ScaledObjectName                  string
 	TriggerAuthName                   string
 	SecretName                        string
@@ -120,7 +120,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{.ServciceName}}
+  name: {{.ServiceName}}
   namespace: {{.TestNamespace}}
 spec:
   selector:
@@ -349,6 +349,7 @@ func getTemplateData(nbReplicasForMetricsServer int) (templateData, []Template) 
 		aggregateFromKubeServiceEndpoints = true
 	}
 	return templateData{
+<<<<<<< HEAD
 			AggregateFromKubeServiceEndpoints: aggregateFromKubeServiceEndpoints,
 			TestNamespace:                     testNamespace,
 			DeploymentName:                    deploymentName,
@@ -361,6 +362,19 @@ func getTemplateData(nbReplicasForMetricsServer int) (templateData, []Template) 
 			MinReplicaCount:                   fmt.Sprintf("%v", minReplicaCount),
 			MaxReplicaCount:                   fmt.Sprintf("%v", maxReplicaCount),
 			NbReplicasForMetricsServer:        nbReplicasForMetricsServer,
+=======
+			TestNamespace:               testNamespace,
+			DeploymentName:              deploymentName,
+			MetricsServerDeploymentName: metricsServerDeploymentName,
+			ServiceName:                 serviceName,
+			TriggerAuthName:             triggerAuthName,
+			ScaledObjectName:            scaledObjectName,
+			SecretName:                  secretName,
+			MetricsServerEndpoint:       metricsServerEndpoint,
+			MinReplicaCount:             fmt.Sprintf("%v", minReplicaCount),
+			MaxReplicaCount:             fmt.Sprintf("%v", maxReplicaCount),
+			MetricValue:                 0,
+>>>>>>> b6eb947fc (fix typo from servcice Name -> service Name)
 		}, []Template{
 			{Name: "secretTemplate", Config: secretTemplate},
 			{Name: "metricsServerdeploymentTemplate", Config: metricsServerdeploymentTemplate},
